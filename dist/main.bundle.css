@@ -1,0 +1,141 @@
+/*!*********************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[2].use[1]!./src/index.css ***!
+  \*********************************************************************************************/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font: 14px "Century Gothic", sans-serif;
+  margin: 20px;
+}
+
+ol, ul {
+  padding-left: 30px;
+}
+
+.node-container {
+  margin: 10px;
+}
+
+.node-row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.node {
+  background: #ffffff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.node:focus {
+  outline: none;
+}
+
+.kbd-navigation .node:focus {
+  background: #ddd;
+}
+
+.node-link {
+  background: #add8e6;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 34px;
+}
+
+.node-link:focus {
+  outline: none;
+}
+
+.kbd-navigation .node-link:focus {
+  background: #ddd;
+}
+
+.chargeStation {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 136px;
+  padding: 0;
+  text-align: center;
+  width: 68px;
+  margin-left: 250px;
+}
+
+.chargeStation:focus {
+  outline: none;
+}
+
+.kbd-navigation .chargeStation:focus {
+  background: #ddd;
+}
+
+.auto {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 68px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 68px;
+}
+
+.auto:focus {
+  outline: none;
+}
+
+.kbd-navigation .auto:focus {
+  background: #ddd;
+}
+
+.game-container {
+  padding: auto;
+}
+
+.autoContainer {
+  position: absolute;
+  z-index: 1000;
+  margin-left: 250px;
+  float: left;
+}
+
+.field {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-info {
+  margin-left: 20px;
+}
+

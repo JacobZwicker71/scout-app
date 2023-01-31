@@ -1,8 +1,11 @@
 import React from 'react';
 
-import fs from 'fs';
-import path from 'path';
-// const { fs, path } = require('filer');
+// import fs from 'fs';
+// const fs = require('fs');
+// import path from 'path';
+// path.resolve(node_modules);
+// const { fs, path } = require('filer'); 
+// import * as fs from 'fs';
 
 import '../index.css';
 import { autoState } from './Auto.js';
@@ -150,21 +153,22 @@ class Grid extends React.Component {
 
   }
 
-  process() {
-    const nodes = this.state.nodes.slice();
-    for (let i = 0; i < nodes.length; i++){
-      fs.writeFile('local-cache/test.json', JSON.stringify(nodes[i].data), (err) => {
-        if (err) { return console.error('error') }
-      });
-    }
-  }
+  // process() {
+  //   const nodes = this.state.nodes.slice();
+  //   for (let i = 0; i < nodes.length; i++){
+  //     fs.writeFile('local-cache/test.json', JSON.stringify(nodes[i].data), (err) => {
+  //       if (err) { return console.error('error') }
+  //     });
+  //   }
+  // }
 
   renderNode(i) {
     return(
       <NodeOut
         Node = {this.state.nodes[i]}
         onClick = {() => { this.score(i)
-                           this.process() }
+                          //  this.process() 
+                         }
                   }
       />
     );
