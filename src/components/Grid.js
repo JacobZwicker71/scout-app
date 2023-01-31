@@ -1,6 +1,10 @@
 import React from 'react';
-import '../index.css';
 
+import fs from 'fs';
+import path from 'path';
+// const { fs, path } = require('filer');
+
+import '../index.css';
 import { autoState } from './Auto.js';
 
 class Node {
@@ -146,11 +150,22 @@ class Grid extends React.Component {
 
   }
 
+  process() {
+    const nodes = this.state.nodes.slice();
+    for (let i = 0; i < nodes.length; i++){
+      fs.writeFile('local-cache/test.json', JSON.stringify(nodes[i].data), (err) => {
+        if (err) { return console.error('error') }
+      });
+    }
+  }
+
   renderNode(i) {
     return(
       <NodeOut
         Node = {this.state.nodes[i]}
-        onClick = {() => this.score(i)}
+        onClick = {() => { this.score(i)
+                           this.process() }
+                  }
       />
     );
   }
