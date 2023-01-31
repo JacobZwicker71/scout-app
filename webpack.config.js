@@ -31,20 +31,20 @@ module.exports = env => {
     module: {
       rules: [
         {
-          test: [/\.(jsx|js)$/, /\.css$/i],
+          test: /\.(jsx|js)$/,
           include: path.resolve(__dirname, 'src'),
           exclude: /node_modules/,
           use: [{
-                  loader: 'babel-loader',
-                  options: {
-                    presets: [
-                      ['@babel/preset-env', {
-                        "targets": "defaults" 
-                      }],
-                      '@babel/preset-react'
-                    ]
-                  }
-                }]
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', {
+                  "targets": "defaults" 
+                }],
+                '@babel/preset-react'
+              ]
+            }
+          }]
         },
         {
           test: /\.css$/i,
@@ -56,14 +56,12 @@ module.exports = env => {
               // options: {
               //   hmr: env.NODE_ENV === 'development',
               // }
-            },
-            {
+            }, {
               loader: 'css-loader',
               options: {
                 importLoaders: 0 
               }
-            }
-          ]
+            }]
         }
       ]
     }
