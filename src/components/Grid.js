@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import fs from 'fs';
-// import * as fs from 'fs';
+// import * as fs from  'fs';
 // const fs = require('../../node_modules/fs/');
 // import path from 'path';
 // import * as path from 'path';
