@@ -94,7 +94,7 @@ class Grid extends React.Component {
     super(props);
     this.state = {
       nodes: Array(27).fill(null),
-      auto: <Auto />
+      auto: props.auto
     };
 
     for (let i = 0; i < this.state.nodes.length; i++) {
@@ -136,10 +136,11 @@ class Grid extends React.Component {
       nodes[i].pointsNode = nodes[i].out == null ? 0 : 2;
     }
     
-    nodes[i].pointsNode += this.state.auto.get() && nodes[i].pointsNode !== 0 ? 1 : 0;
-    nodes[i].auto = this.state.auto.get();
+    nodes[i].pointsNode += this.state.auto.auto && nodes[i].pointsNode !== 0 ? 1 : 0;
+    nodes[i].auto = this.state.auto.auto;
     console.log(nodes[i].pointsNode);
     console.log(nodes[i].auto);
+    console.log(this.state.auto.auto)
 
     this.setState({
       nodes: nodes,

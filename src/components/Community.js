@@ -7,7 +7,7 @@ class Community extends React.Component {
     super(props);
     this.state = {
       chargeStation: new ChargeStation(),
-      auto: <Auto />
+      auto: props.auto
     }
   }
 
@@ -27,7 +27,7 @@ class Community extends React.Component {
       chargeStation.pointsCharge = 0;
     }
 
-    chargeStation.pointsCharge += this.state.auto.get() && chargeStation.pointsCharge !== 0 ? 2 : 0;
+    chargeStation.pointsCharge += this.state.auto.auto && chargeStation.pointsCharge !== 0 ? 2 : 0;
     console.log(chargeStation.pointsCharge);
 
     this.setState({
