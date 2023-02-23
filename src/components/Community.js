@@ -1,13 +1,13 @@
 import React from 'react';
+import { Auto } from './Auto.js';
 import '../index.css';
-
-import { autoState } from './Auto.js';
 
 class Community extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       chargeStation: new ChargeStation(),
+      auto: <Auto />
     }
   }
 
@@ -27,7 +27,7 @@ class Community extends React.Component {
       chargeStation.pointsCharge = 0;
     }
 
-    chargeStation.pointsCharge += autoState.state && chargeStation.pointsCharge !== 0 ? 2 : 0;
+    chargeStation.pointsCharge += this.state.auto.get() && chargeStation.pointsCharge !== 0 ? 2 : 0;
     console.log(chargeStation.pointsCharge);
 
     this.setState({

@@ -93,8 +93,8 @@ ol, ul {
   background: #ddd;
 }
 
-.auto {
-  background: #fff;
+.autoOn {
+  background: rgb(0, 150, 0);
   border: 1px solid #999;
   float: left;
   font-size: 12px;
@@ -108,12 +108,35 @@ ol, ul {
   width: 68px;
 }
 
-.auto:focus {
+.autoOn:focus {
   outline: none;
 }
 
-.kbd-navigation .auto:focus {
-  background: #ddd;
+.kbd-navigation .autoOn:focus {
+  background: rgb(0, 150, 0);
+}
+
+.autoOff {
+  background: rgb(150, 0, 0);
+  border: 1px solid #999;
+  float: left;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 68px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 68px;
+}
+
+.autoOff:focus {
+  outline: none;
+}
+
+.kbd-navigation .autoOff:focus {
+  background: rgb(150, 0, 0);
 }
 
 .game-container {

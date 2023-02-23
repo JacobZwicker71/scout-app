@@ -1,35 +1,53 @@
 import React from 'react';
 import '../index.css';
 
-class autoState {
-  static state = true;
+// class autoState {
+//   static state = true;
 
-  set state(state) { this.state = state; }
+//   set state(state) { this.state = state; }
 
-  get state() { return (this.state); }
+//   get state() { return (this.state); }
 
-  static toggle() {
-    this.state = !this.state;
-    //console.log(autoState.state)
-  }
-}
+//   static toggle() {
+//     this.state = !this.state;
+//     //console.log(autoState.state)
+//   }
+// }
 
 function Button(props) {
   return (
-    <button className="auto" onClick={props.onClick}>
+    <button className={(props.color) ? "autoOn" : 'autoOff'} onClick={props.onClick}>
       {"Auto"}
-      {props.out}
     </button>
   )
 }
 
 class Auto extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      auto: true
+    };
+  }
+
+  get() {
+    console.log("e");
+    return this.state.auto;
+  }
+
+  toggle() {
+    const auto = !this.state.auto;
+    this.setState({
+      auto: auto,
+    });
+    console.log(this.state.auto)
+  }
 
   renderButton() {
     return(
       <Button
-        out = {autoState.state}
-        onClick = {() => autoState.toggle()}
+        color = {this.state.auto}
+        onClick = {() => this.toggle()}
       />
     );
   }
@@ -43,4 +61,4 @@ class Auto extends React.Component {
   }
 }
 
-export { autoState, Auto };
+export { Auto };

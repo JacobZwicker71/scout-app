@@ -7,21 +7,16 @@ import React from 'react';
 // import * as path from 'path';
 // const path = require('path');
 
+import { Auto } from './Auto.js';
 import '../index.css';
-import { autoState } from './Auto.js';
 
 class Node {
   #out = null;
-
   #nodeUp = null;
   #nodeDown = null;
-
   #pointsNode = 0;
-
   #auto = false;
-
   #id = 0;
-
   #color = false;
 
   constructor(out, nodeUp, nodeDown, points, id) {
@@ -98,8 +93,10 @@ class Grid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nodes: Array(27).fill(null)
+      nodes: Array(27).fill(null),
+      auto: <Auto />
     };
+
     for (let i = 0; i < this.state.nodes.length; i++) {
       this.state.nodes[i] = new Node(null, null, null, 0, i, false)
 
@@ -139,8 +136,8 @@ class Grid extends React.Component {
       nodes[i].pointsNode = nodes[i].out == null ? 0 : 2;
     }
     
-    nodes[i].pointsNode += autoState.state && nodes[i].pointsNode !== 0 ? 1 : 0;
-    nodes[i].auto = autoState.state;
+    nodes[i].pointsNode += this.state.auto.get() && nodes[i].pointsNode !== 0 ? 1 : 0;
+    nodes[i].auto = this.state.auto.get();
     console.log(nodes[i].pointsNode);
     console.log(nodes[i].auto);
 
