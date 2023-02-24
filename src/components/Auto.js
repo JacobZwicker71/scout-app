@@ -1,3 +1,4 @@
+import { properties } from 'filer/src/webpack-plugin/schema';
 import React from 'react';
 import '../index.css';
 
@@ -26,11 +27,11 @@ class Auto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      auto: true
+      auto: props.auto
     };
   }
 
-  get() {
+  temp() {
     console.log("e");
     return this.state.auto;
   }

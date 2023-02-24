@@ -90,11 +90,12 @@ function NodeOut(props) {
 }
 
 class Grid extends React.Component {
-  constructor(props) {
+  constructor(props, auto) {
     super(props);
+    this.auto = auto
     this.state = {
       nodes: Array(27).fill(null),
-      auto: props.auto
+      // Auto: props.auto
     };
 
     for (let i = 0; i < this.state.nodes.length; i++) {
@@ -111,6 +112,7 @@ class Grid extends React.Component {
 
   score(i) {
     const nodes = this.state.nodes.slice();
+    // const auto = this.state.auto;
     
     if (i % 3 === 2) {
       if (nodes[i].out == null) {
@@ -136,11 +138,11 @@ class Grid extends React.Component {
       nodes[i].pointsNode = nodes[i].out == null ? 0 : 2;
     }
     
-    nodes[i].pointsNode += this.state.auto.auto && nodes[i].pointsNode !== 0 ? 1 : 0;
-    nodes[i].auto = this.state.auto.auto;
+    nodes[i].pointsNode += this.auto.temp() && nodes[i].pointsNode !== 0 ? 1 : 0;
+    nodes[i].auto = this.auto.temp();
     console.log(nodes[i].pointsNode);
     console.log(nodes[i].auto);
-    console.log(this.state.auto.auto)
+    console.log(this.auto.temp())
 
     this.setState({
       nodes: nodes,

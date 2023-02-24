@@ -27,7 +27,7 @@ class Community extends React.Component {
       chargeStation.pointsCharge = 0;
     }
 
-    chargeStation.pointsCharge += this.state.auto.auto && chargeStation.pointsCharge !== 0 ? 2 : 0;
+    chargeStation.pointsCharge += this.state.auto.temp() && chargeStation.pointsCharge !== 0 ? 2 : 0;
     console.log(chargeStation.pointsCharge);
 
     this.setState({
