@@ -127,6 +127,14 @@ ol, ul {
   float: left;
 }
 
+.leftContainer {
+  position: absolute;
+  top: 100px;
+  margin-left: 250px;
+  width: 10px;
+  height: 10px;
+}
+
 .field {
   display: flex;
   flex-direction: row;

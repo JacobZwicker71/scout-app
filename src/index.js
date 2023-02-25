@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import Grid from './components/Grid.js';
 import Community from './components/Community.js';
 import { Auto } from './components/Auto.js';
+import { LeftC } from './components/LeftCommunity';
 import './index.css';
 
 class Field extends React.Component {
@@ -19,6 +20,9 @@ class Field extends React.Component {
       <div className='game-container'>
         <div className='autoContainer'>
           <Auto />
+        </div>
+        <div className='leftContainer'>
+          <LeftC />
         </div>
         <div className="field-container">
           <div className="game-field">

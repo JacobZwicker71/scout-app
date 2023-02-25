@@ -9,6 +9,29 @@ import React from 'react';
 
 import '../index.css';
 import { autoState } from './Auto.js';
+import { leftState } from './LeftCommunity';
+
+class ScoreState {
+  static score = 0;
+
+  set score(score) { this.score = score; }
+
+  get score() { return (this.score); }
+
+}
+
+/* class leftState {
+  static state = true;
+
+  set state(state) { this.state = state; }
+
+  get state() { return (this.state); }
+
+  static toggle() {
+    this.state = !this.state;
+    //console.log(leftState.state)
+  }
+} */
 
 class Node {
   #out = null;
@@ -141,8 +164,10 @@ class Grid extends React.Component {
     
     nodes[i].pointsNode += autoState.state && nodes[i].pointsNode !== 0 ? 1 : 0;
     nodes[i].auto = autoState.state;
+    ScoreState.score = ScoreState.score + nodes[i].pointsNode;
     console.log(nodes[i].pointsNode);
     console.log(nodes[i].auto);
+    console.log(ScoreState.score);
 
     this.setState({
       nodes: nodes,
@@ -176,7 +201,11 @@ class Grid extends React.Component {
 
   render() {
     return (
+
       <div className="grid-container">
+      <div className="Score-state">
+          <p> score: {ScoreState.score}</p>
+      </div>
       {/* outer 1 */}
         <div className="node-container">
           <div className="node-row">
