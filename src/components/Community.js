@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../index.css';
 
 import { autoState } from './Auto.js';
@@ -43,16 +43,46 @@ class Community extends React.Component {
       />
     );
   }
+    renderComments(){
+      let msg;
+      const submit = (e) =>{
+        e.preventDefault();
+      }
+      const setMessage = (m) =>{
+        msg = m;
+      }
+      //Button is temp for testing :) || assigns inputted text to message var
+      return(
+        <form onSubmit={submit}>
+        <legend><b>Defense Comments</b></legend> 
+        <textarea type="text" 
+        required 
+        value={msg}
+        onChange={(e) => setMessage(e.target.value)}
+        rows="15"
+        cols="25"
+        />
+        <br></br>
+        <button onClick={(e) => {console.log(msg)}}>CLICK TO VIEW INPUT</button>
+        </form>
+      )
+    }
+
 
   render() {
     return(
       <div className="Community">
-        {this.renderCharge()}
+        {
+        this.renderCharge()
+        }
+        {
+        this.renderComments()
+        }
+
       </div>
     );
   }
 }
-
 class ChargeStation {
   #out = null;
   #pointsCharge = 0;
