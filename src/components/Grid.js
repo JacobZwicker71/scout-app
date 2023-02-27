@@ -165,6 +165,9 @@ class Grid extends React.Component {
     
     nodes[i].pointsNode += autoState.state && nodes[i].pointsNode !== 0 ? 1 : 0;
     nodes[i].auto = autoState.state;
+    if (nodes[i].link() == true){
+    ScoreState.score = ScoreState.score + 5;
+    }
     ScoreState.score = ScoreState.score + nodes[i].pointsNode;
     console.log(nodes[i].pointsNode);
     console.log(nodes[i].auto);
