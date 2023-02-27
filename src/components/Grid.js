@@ -121,7 +121,7 @@ class Grid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nodes: Array(27).fill(null)
+      nodes: Array(27).fill(null),
     };
     for (let i = 0; i < this.state.nodes.length; i++) {
       this.state.nodes[i] = new Node(null, null, null, 0, i, false)
@@ -134,6 +134,7 @@ class Grid extends React.Component {
       }
     }
   }
+
 
   score(i) {
     const nodes = this.state.nodes.slice();
@@ -267,4 +268,4 @@ class Grid extends React.Component {
   }
 }
 
-export default Grid;
+export { Grid, ScoreState };

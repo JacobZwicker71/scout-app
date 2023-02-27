@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import Grid from './components/Grid.js';
+import { Grid } from './components/Grid.js';
 import Community from './components/Community.js';
 import { Auto } from './components/Auto.js';
 import { LeftC } from './components/LeftCommunity';
