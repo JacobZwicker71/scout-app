@@ -12,8 +12,8 @@ class Field extends React.Component {
     this.state = {
       match: Array(23).fill(null),
       auto: <Auto />,
-      grid: <Grid Auto = {this.auto}/>,
-      community: <Community Auto = {this.auto}/>
+      // grid: <Grid Auto = {this.auto}/>,
+      // community: <Community Auto = {this.auto}/>
     }
   }
 
@@ -25,10 +25,10 @@ class Field extends React.Component {
         </div>
         <div className="field-container">
           <div className="game-field">
-            {this.state.grid}
+            <Grid auto = {this.state.auto}/>
           </div>
           <div className="Community-container">
-            {this.state.community}
+            <Community auto = {this.state.auto}/>
           </div>
         </div>
       </div>

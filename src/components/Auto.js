@@ -27,11 +27,11 @@ class Auto extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      auto: props.auto
+      auto: true
     };
   }
 
-  temp() {
+  get auto() {
     console.log("e");
     return this.state.auto;
   }
@@ -41,7 +41,7 @@ class Auto extends React.Component {
     this.setState({
       auto: auto,
     });
-    console.log(this.state.auto)
+    console.log(this.auto)
   }
 
   renderButton() {
