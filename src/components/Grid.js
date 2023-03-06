@@ -24,6 +24,12 @@ class Node {
 
   #color = false;
 
+  #number = 0;
+
+  #array = null;
+
+  #missAmount = 0;
+
   constructor(out, nodeUp, nodeDown, points, id) {
     // let data = {
     //   out: out,
@@ -40,15 +46,20 @@ class Node {
     this.#nodeDown = nodeDown;
     this.#pointsNode = points;
     this.#id = id;
+    this.#number = 0;
+    this.#array = [];
+    this.#missAmount = 0;
   }
-
   get out() { return this.#out; }
   get nodeUp() { return this.#nodeUp; }
   get nodeDown() { return this.#nodeDown; }
   get pointsNode() { return this.#pointsNode; }
   get auto() { return this.#auto; }
   get id() { return this.#id; }
+  get num(){return this.#number}
+  get array(){return this.#array;}
   get color() { return this.#color; }
+  get missAmount() {return this.#missAmount;}
 
   set out(out) { this.#out = out; }
   set nodeUp(nodeUp) { this.#nodeUp = nodeUp; }
@@ -56,6 +67,9 @@ class Node {
   set pointsNode(points) { this.#pointsNode = points; }
   set auto(auto) { this.#auto = auto; }
   set id(id) {this.#id = id; }
+  set num(num) {this.#number = num;}
+  set array(arr){this.#array = arr;}
+  set missAmount(mA){this.#missAmount = mA;}
   set color(color) { this.#color = color; }
 
   link() {
@@ -98,8 +112,10 @@ class Grid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      nodes: Array(27).fill(null)
+      nodes: Array(27).fill(null),
+      miss: false
     };
+    
     for (let i = 0; i < this.state.nodes.length; i++) {
       this.state.nodes[i] = new Node(null, null, null, 0, i, false)
 
@@ -112,20 +128,47 @@ class Grid extends React.Component {
     }
   }
 
+
+
   score(i) {
     const nodes = this.state.nodes.slice();
-    
+    if(nodes[i].num < 0){nodes[i].num = 0}
+    if(nodes[i].array == null){nodes[i].array = []}
+    let tempVarCone = <img id="img" src="img/c.svg" width="25"/>
+    let tempVarCube = <img id="img" src="img/q.svg" width="25"/>
+    let missAmount = nodes[i].missAmount;
+
     if (i % 3 === 2) {
-      if (nodes[i].out == null) {
-        nodes[i].out = 'x';
+      if (nodes[i].num == 0) {
+        if(!this.state.miss){
+          nodes[i].array[missAmount] = tempVarCone
+          nodes[i].num = 1;
       } else {
-        nodes[i].out = nodes[i].out === 'x' ? 'o' : null;
+        nodes[i].array[missAmount] = tempVarCone;
+        nodes[i].missAmount++;
       }
-    } else {
+    }
+   else if(nodes[i].num == 1) {
+    if(!this.state.miss){
+      nodes[i].array[missAmount] = tempVarCube
+      nodes[i].num = 2;
+  } else {
+    nodes[i].array[missAmount] = tempVarCube;
+    nodes[i].missAmount++;
+  }
+  } else{
+    nodes[i].array = null;
+    nodes[i].out = null;
+    nodes[i].num = 0;
+  }
+
+      nodes[i].out = nodes[i].array;
+}
+else {
       if ((i % 9 !== 3) && (i % 9 !== 4)) {
-        nodes[i].out = nodes[i].out == null ? 'o' : null;
+        nodes[i].out = nodes[i].out == null ? tempVarCube : null;
       } else {
-        nodes[i].out = nodes[i].out == null ? 'x' : null;
+        nodes[i].out = nodes[i].out == null ? tempVarCone : null;
       }
     }
     
@@ -141,8 +184,8 @@ class Grid extends React.Component {
     
     nodes[i].pointsNode += autoState.state && nodes[i].pointsNode !== 0 ? 1 : 0;
     nodes[i].auto = autoState.state;
-    console.log(nodes[i].pointsNode);
-    console.log(nodes[i].auto);
+    // console.log(nodes[i].pointsNode);
+    // console.log(nodes[i].auto);
 
     this.setState({
       nodes: nodes,
@@ -174,9 +217,19 @@ class Grid extends React.Component {
     );
   }
 
+
   render() {
+    const toggleMiss= () =>{
+      this.state.miss = !this.state.miss;
+      console.log(this.state.miss);
+      const nodes = this.state.nodes.slice();
+      for(var i = 0; i < 27; i++){
+        nodes[i].num -=1;
+      }
+    }
     return (
       <div className="grid-container">
+      <button onClick={(e) => toggleMiss()}>Toggle Miss</button>
       {/* outer 1 */}
         <div className="node-container">
           <div className="node-row">
