@@ -134,26 +134,29 @@ class Grid extends React.Component {
     const nodes = this.state.nodes.slice();
     if(nodes[i].num < 0){nodes[i].num = 0}
     if(nodes[i].array == null){nodes[i].array = []}
-    let tempVarCone = <img id="img" src="img/c.svg" width="25"/>
-    let tempVarCube = <img id="img" src="img/q.svg" width="25"/>
+    let Cone = <img id="img" src="img/c.svg" width="25"/>
+    let Cube = <img id="img" src="img/q.svg" width="25"/>
     let missAmount = nodes[i].missAmount;
-
+    if(this.state.miss){
+      Cone = <img id="img" src="img/cm.svg" width="25"/>
+      Cube = <img id="img" src="img/qm.svg" width="25"/>
+    }
     if (i % 3 === 2) {
       if (nodes[i].num == 0) {
         if(!this.state.miss){
-          nodes[i].array[missAmount] = tempVarCone
+          nodes[i].array[missAmount] = Cone;
           nodes[i].num = 1;
       } else {
-        nodes[i].array[missAmount] = tempVarCone;
+        nodes[i].array[missAmount] = Cone;
         nodes[i].missAmount++;
       }
     }
    else if(nodes[i].num == 1) {
     if(!this.state.miss){
-      nodes[i].array[missAmount] = tempVarCube
+      nodes[i].array[missAmount] = Cube;
       nodes[i].num = 2;
   } else {
-    nodes[i].array[missAmount] = tempVarCube;
+    nodes[i].array[missAmount] = Cube;
     nodes[i].missAmount++;
   }
   } else{
@@ -164,12 +167,38 @@ class Grid extends React.Component {
 
       nodes[i].out = nodes[i].array;
 }
+//START
 else {
       if ((i % 9 !== 3) && (i % 9 !== 4)) {
-        nodes[i].out = nodes[i].out == null ? tempVarCube : null;
+        if(!this.state.miss){
+          if(nodes[i].array.length == 0){
+            nodes[i].out = "cone";
+            nodes[i].array[missAmount] = Cone;
+        }
+        else{
+          nodes[i].array = null;
+        }
       } else {
-        nodes[i].out = nodes[i].out == null ? tempVarCone : null;
+        nodes[i].array[missAmount] = Cone;
+        nodes[i].missAmount++;
       }
+      nodes[i].out = nodes[i].array;
+    }
+    else{
+      if(!this.state.miss){
+        if(nodes[i].array.length == 0){
+          nodes[i].out = "cube";
+          nodes[i].array[missAmount] = Cube;
+      }
+      else{
+        nodes[i].array = null;
+      }
+    } else {
+      nodes[i].array[missAmount] = Cube;
+      nodes[i].missAmount++;
+    }
+    nodes[i].out = nodes[i].array;
+  }
     }
     
     if (i % 3 === 0) {
@@ -195,6 +224,7 @@ else {
     nodes[i].update();
 
   }
+
 
   // process() {
   //   const nodes = this.state.nodes.slice();
