@@ -259,7 +259,7 @@ else {
     }
     return (
       <div className="grid-container">
-      <button onClick={(e) => toggleMiss()}>Toggle Miss</button>
+      <button className='toggleMiss' onClick={(e) => toggleMiss()}>Toggle Miss</button>
       {/* outer 1 */}
         <div className="node-container">
           <div className="node-row">

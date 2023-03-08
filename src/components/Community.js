@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 
+
 import { autoState } from './Auto.js';
 
 class Community extends React.Component {
@@ -63,7 +64,7 @@ class Community extends React.Component {
         cols="25"
         />
         <br></br>
-        <button onClick={(e) => {console.log(msg)}}>CLICK TO VIEW INPUT</button>
+        <button onClick={(e) => {console.log(msg)}}>Save</button>
         </form>
       )
     }
