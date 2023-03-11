@@ -202,14 +202,43 @@ else {
     }
     
     if (i % 3 === 0) {
-      nodes[i].pointsNode = nodes[i].out == null ? 0 : 5;
+      let allMiss = true;
+      if(nodes[i].out != null){
+      nodes[i].out.forEach(function (item){      
+        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
+          allMiss = false;
+        }
+      });
     }
+
+    // if(allMiss){console.log(nodes[i].array)}
+    nodes[i].pointsNode = allMiss == true ? 0 : 5;
+  }
     else if (i % 3 === 1) {
-      nodes[i].pointsNode = nodes[i].out == null ? 0 : 3;
+      let allMiss = true;
+      if(nodes[i].out != null){
+      nodes[i].out.forEach(function (item){      
+        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
+          allMiss = false;
+        }
+      });
     }
+
+    // if(allMiss){console.log(nodes[i].array)}
+    nodes[i].pointsNode = allMiss == true ? 0 : 3;
+  }
     else {
-      nodes[i].pointsNode = nodes[i].out == null ? 0 : 2;
+      let allMiss = true;
+      if(nodes[i].out != null){
+      nodes[i].out.forEach(function (item){      
+        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
+          allMiss = false;
+        }
+      });
     }
+
+    // if(allMiss){console.log(nodes[i].array)}
+    nodes[i].pointsNode = allMiss == true ? 0 : 2;}
     
     nodes[i].pointsNode += autoState.state && nodes[i].pointsNode !== 0 ? 1 : 0;
     nodes[i].auto = autoState.state;
@@ -256,6 +285,14 @@ else {
       for(var i = 0; i < 27; i++){
         nodes[i].num -=1;
       }
+    }
+    const logScore = () => {
+      let nodes = this.state.nodes.slice();
+      let sum = 0;
+      for(let i = 0; i < 26; i++){
+        sum+=nodes[i].pointsNode;
+      }
+      console.log(sum);
     }
     return (
       <div className="grid-container">
@@ -316,6 +353,7 @@ else {
             {this.renderNode(26)}
           </div>
         </div>
+        <button className='logScore' onClick={(e) => logScore()}>logScore</button>
       </div>
     );
   }
