@@ -71,19 +71,39 @@ class Node {
   set array(arr){this.#array = arr;}
   set missAmount(mA){this.#missAmount = mA;}
   set color(color) { this.#color = color; }
-
+  allMiss(node){
+    let allMiss = true;
+    if(node != undefined){
+      if(node.array != null){
+      node.array.forEach(function (item){      
+        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
+          allMiss = false;
+        }
+      });
+    }    
+  }
+    ;
+  return allMiss;
+}
+    
+  
   link() {
     let curr = this;
-    while (curr.nodeUp != null) {
-      curr = curr.nodeUp;
-      // console.log("going up");
+    if(curr.allMiss(curr)){
+      return false;
     }
-    while (curr.nodeDown != null) {
-      if (curr.out == null) { return false; }
+    while(curr.nodeDown != null){
       curr = curr.nodeDown;
-      // console.log("going down");
+      if(curr.allMiss(curr)){
+        return false;
+      }
     }
-    if (curr.out == null) { return false; }
+    while(curr.nodeUp != null){
+      curr = curr.nodeUp;
+      if(curr.allMiss(curr)){
+        return false;
+      }
+    }
     return true;
   }
 
@@ -202,43 +222,14 @@ else {
     }
     
     if (i % 3 === 0) {
-      let allMiss = true;
-      if(nodes[i].out != null){
-      nodes[i].out.forEach(function (item){      
-        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
-          allMiss = false;
-        }
-      });
-    }
-
-    // if(allMiss){console.log(nodes[i].array)}
-    nodes[i].pointsNode = allMiss == true ? 0 : 5;
+    nodes[i].pointsNode = nodes[i].allMiss(nodes[i]) == true ? 0 : 5;
   }
     else if (i % 3 === 1) {
-      let allMiss = true;
-      if(nodes[i].out != null){
-      nodes[i].out.forEach(function (item){      
-        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
-          allMiss = false;
-        }
-      });
+      nodes[i].pointsNode = nodes[i].allMiss(nodes[i]) == true ? 0 : 3;
     }
-
-    // if(allMiss){console.log(nodes[i].array)}
-    nodes[i].pointsNode = allMiss == true ? 0 : 3;
-  }
     else {
-      let allMiss = true;
-      if(nodes[i].out != null){
-      nodes[i].out.forEach(function (item){      
-        if(item.props.src != "img/cm.svg" && item.props.src != "img/qm.svg"){
-          allMiss = false;
-        }
-      });
-    }
-
-    // if(allMiss){console.log(nodes[i].array)}
-    nodes[i].pointsNode = allMiss == true ? 0 : 2;}
+      nodes[i].pointsNode = nodes[i].allMiss(nodes[i]) == true ? 0 : 2;
+  }
     
     nodes[i].pointsNode += autoState.state && nodes[i].pointsNode !== 0 ? 1 : 0;
     nodes[i].auto = autoState.state;
