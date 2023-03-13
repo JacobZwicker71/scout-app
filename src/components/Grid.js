@@ -280,7 +280,7 @@ else {
     const logScore = () => {
       let nodes = this.state.nodes.slice();
       let sum = 0;
-      for(let i = 0; i < 26; i++){
+      for(let i = 0; i < 27; i++){
         sum+=nodes[i].pointsNode;
       }
       console.log(sum);
@@ -350,4 +350,4 @@ else {
   }
 }
 
-export default Grid;
+export {Grid};
