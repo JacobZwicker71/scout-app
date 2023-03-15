@@ -190,34 +190,38 @@ class Grid extends React.Component {
 //START
 else {
       if ((i % 9 !== 3) && (i % 9 !== 4)) {
-        if(!this.state.miss){
-          if(nodes[i].array.length == 0){
-            nodes[i].out = "cone";
+        if (nodes[i].num == 0) {
+          if(!this.state.miss){
             nodes[i].array[missAmount] = Cone;
+            nodes[i].num = 1;
+        } else {
+          nodes[i].array[missAmount] = Cone;
+          nodes[i].missAmount++;
         }
-        else{
-          nodes[i].array = null;
-        }
+      } else{
+      nodes[i].array = null;
+      nodes[i].out = null;
+      nodes[i].num = 0;
+    }
+  
+        nodes[i].out = nodes[i].array;
+  }
+    else{
+      if (nodes[i].num == 0) {
+        if(!this.state.miss){
+          nodes[i].array[missAmount] = Cube;
+          nodes[i].num = 1;
       } else {
-        nodes[i].array[missAmount] = Cone;
+        nodes[i].array[missAmount] = Cube;
         nodes[i].missAmount++;
       }
-      nodes[i].out = nodes[i].array;
-    }
-    else{
-      if(!this.state.miss){
-        if(nodes[i].array.length == 0){
-          nodes[i].out = "cube";
-          nodes[i].array[missAmount] = Cube;
-      }
-      else{
-        nodes[i].array = null;
-      }
-    } else {
-      nodes[i].array[missAmount] = Cube;
-      nodes[i].missAmount++;
-    }
-    nodes[i].out = nodes[i].array;
+    } else{
+    nodes[i].array = null;
+    nodes[i].out = null;
+    nodes[i].num = 0;
+  }
+  
+  nodes[i].out = nodes[i].array;
   }
     }
     

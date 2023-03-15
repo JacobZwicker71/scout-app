@@ -14,13 +14,21 @@ class Community extends React.Component {
 
   score() {
     const chargeStation = this.state.chargeStation;
+    let csDockFail = <img id="img" src="img/failedDock.svg" width="250"/>
+    let csDockSuccess= <img id="img" src="img/sucessDock.svg" width="250"/>
+    let csEngageFail = <img id="img" src="img/failedEngage.svg" width="250"/>
+    let csEngageSucess = <img id="img" src="img/sucessEngage.svg" width="250"/>
+
+    
 
     if (chargeStation.out == null) {
-      chargeStation.out = "-";
+      chargeStation.out = csDockFail;
+      console.log(chargeStation.out)
+      
       chargeStation.pointsCharge = 6;
     }
-    else if (chargeStation.out === "-") {
-      chargeStation.out = "+";
+    else if (chargeStation.out === csDockFail) {
+      chargeStation.out = csDockSuccess;
       chargeStation.pointsCharge = 10;
     }
     else {
