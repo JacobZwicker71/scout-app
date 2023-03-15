@@ -5,16 +5,15 @@ import '../index.css';
 import { autoState } from './Auto.js';
 
 class Community extends React.Component {
+  #message = "";
   constructor(props) {
     super(props);
     this.state = {
       chargeStation: new ChargeStation(),
     }
-    this.props = {
-      msg: "a"
-    }
-    
   }
+  get message(){return this.#message;}
+  set message(m){this.#message = m;}
 
   score() {
     const chargeStation = this.state.chargeStation;
@@ -22,6 +21,7 @@ class Community extends React.Component {
     let csDockSuccess= <img id="img" src="img/sucessDock.svg" width="200"/>
     let csEngageFail = <img id="img" src="img/failedEngage.svg" width="200"/>
     let csEngageSucess = <img id="img" src="img/sucessEngage.svg" width="200"/>
+    let defaultCharge = <img id="img" src="img/defaultCharge.svg" width="200"/>
 
     
 
@@ -47,7 +47,7 @@ class Community extends React.Component {
     }
     else {
       chargeStation.out = null;
-      chargeStation.sym = "";
+      chargeStation.sym = defaultCharge;
       chargeStation.pointsCharge = 0;
     }
 
@@ -67,30 +67,31 @@ class Community extends React.Component {
       />
     );
   }
-    renderComments(){
-      const submit = (e) =>{
-        e.preventDefault();
-      }
-      const setMessage = (m) =>{
-        this.props.msg = m;
-        console.log(m + "|" + this.props.msg)
-      }
-      //Button is temp for testing :) || assigns inputted text to message var
-      return(
-        <form onSubmit={submit}>
-        <legend><b>Defense Comments</b></legend> 
-        <textarea type="text" 
-        required 
-        value={this.props.msg}
-        onChange={(e) => setMessage(e.target.value)}
-        rows="15"
-        cols="25"
-        />
-        <br></br>
-        <button onClick={(e) => {console.log(this.props.msg)}}>Save</button>
-        </form>
-      )
+  renderComments(){
+    let msg;
+    const submit = (e) =>{
+      e.preventDefault();
     }
+    const setMessage = (m) =>{
+      msg = m;
+      this.message = msg;
+    }
+    //Save doesn't actually do anything but log saved message to console!
+    return(
+      <form onSubmit={submit}>
+      <legend><b>Defense Comments</b></legend> 
+      <textarea type="text" 
+      required 
+      value={msg}
+      onChange={(e) => setMessage(e.target.value)}
+      rows="15"
+      cols="25"
+      />
+      <br></br>
+      <button onClick={(e) => {console.log(this.message)}}>Save</button>
+      </form>
+    )
+  }
     
 
 
@@ -131,7 +132,7 @@ function ChargeOut(props) {
   return (
     <button className="chargeStation" onClick={props.onClick}>
       {props.ChargeStation.sym}
-    </button>
+     </button>
   )
 }
 
