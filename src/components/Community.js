@@ -9,14 +9,22 @@ class Community extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      chargeStationAuto: new ChargeStation(),
       chargeStation: new ChargeStation(),
     }
   }
   get message(){return this.#message;}
   set message(m){this.#message = m;}
 
-  score() {
-    const chargeStation = this.state.chargeStation;
+  score(auto) {
+    console.log(auto);
+    let chargeStation = this.state.chargeStation;
+    if(auto){
+      chargeStation = this.state.chargeStationAuto;
+    }
+    else{
+      chargeStation = this.state.chargeStation;
+    }
     let csDockFail = <img id="img" src="img/failedDock.svg" width="200"/>
     let csDockSuccess= <img id="img" src="img/sucessDock.svg" width="200"/>
     let csEngageFail = <img id="img" src="img/failedEngage.svg" width="200"/>
@@ -27,43 +35,84 @@ class Community extends React.Component {
 
     if (chargeStation.out == null) {
       chargeStation.out = "-";
-      chargeStation.sym = csDockFail;      
+      chargeStation.sym = csDockFail;     
+      if(auto){
+        chargeStation.pointsChargeAuto = 0;
+
+      } 
+      else{
       chargeStation.pointsCharge = 0;
+      }
     }
     else if (chargeStation.out === "-") {
       chargeStation.out = "+";
       chargeStation.sym = csDockSuccess;
+      if(auto){
+        chargeStation.pointsChargeAuto = 6;
+
+      } 
+      else{
       chargeStation.pointsCharge = 6;
-    }
+      }    }
     else if(chargeStation.out === "+"){
       chargeStation.out = "*";
       chargeStation.sym = csEngageFail;
+      if(auto){
+        chargeStation.pointsChargeAuto = 0;
+
+      } 
+      else{
       chargeStation.pointsCharge = 0;
-    }
+      }    }
     else if(chargeStation.out === "*"){
       chargeStation.sym = csEngageSucess;
       chargeStation.out = "asfaf";
-      chargeStation.pointsCharge = 10
-    }
+      if(auto){
+        chargeStation.pointsChargeAuto = 10;
+
+      } 
+      else{
+      chargeStation.pointsCharge = 10;
+      }    }
     else {
       chargeStation.out = null;
       chargeStation.sym = defaultCharge;
+      if(auto){
+        chargeStation.pointsChargeAuto = 0;
+
+      } 
+      else{
       chargeStation.pointsCharge = 0;
+      }    }
+      if(auto && chargeStation.pointsChargeAuto != 0){
+        chargeStation.pointsChargeAuto+=2;
+      }
+
+
+    if(auto){
+      this.setState({
+        chargeStationAuto: chargeStation,
+      });
     }
-
-    chargeStation.pointsCharge += autoState.state && chargeStation.pointsCharge !== 0 ? 2 : 0;
-    console.log(chargeStation.pointsCharge);
-
+    else{
     this.setState({
       chargeStation: chargeStation,
     });
   }
+  }
 
-  renderCharge() {
+  renderCharge(auto) {
+    let chargeStation = this.state.chargeStation;
+    if(auto){
+      chargeStation = this.state.chargeStationAuto;
+    }
+    else{
+      chargeStation = this.state.chargeStation;
+    }
     return(
       <ChargeOut
-        ChargeStation={this.state.chargeStation}
-        onClick={() => this.score()}
+        ChargeStation={chargeStation}
+        onClick={() => this.score(auto)}
       />
     );
   }
@@ -100,7 +149,10 @@ class Community extends React.Component {
     return(
       <div className="Community">
         {
-        this.renderCharge()
+        this.renderCharge(true)
+        }
+        {
+          this.renderCharge(false)
         }
         {
         this.renderComments()
@@ -111,29 +163,39 @@ class Community extends React.Component {
   }
 }
 class ChargeStation {
+  static pointsCharge = 0;
+  static pointsChargeAuto = 0;
   #out = null;
-  #pointsCharge = 0;
-  #sym = "";
+  #sym = <img id="img" src="img/defaultCharge.svg" width="200"/>;
   constructor(out, points) {
     this.#out = out;
-    this.#pointsCharge = points;
+  }
+  static getScore(){
+    return ChargeStation.pointsCharge + ChargeStation.pointsChargeAuto;
   }
 
   get out() { return (this.#out); }
   get sym() {return (this.#sym);}
-  get pointsCharge() { return (this.#pointsCharge); }
+  get pointsCharge() { return (ChargeStation.pointsCharge); }
+  get pointsChargeAuto() { return (ChargeStation.pointsChargeAuto); }
+
 
   set out(out) { this.#out = out; }
-  set pointsCharge(points) { this.#pointsCharge = points; }
+  set pointsCharge(points) { ChargeStation.pointsCharge = points;}
+  set pointsChargeAuto(points) { ChargeStation.pointsChargeAuto = points; }
+
   set sym(s){this.#sym = s;}
 }
 
 function ChargeOut(props) {
   return (
+    <div>
     <button className="chargeStation" onClick={props.onClick}>
       {props.ChargeStation.sym}
      </button>
+     </div>
+     
   )
 }
 
-export default Community;
+export {Community, ChargeStation};

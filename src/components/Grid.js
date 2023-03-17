@@ -129,29 +129,32 @@ function NodeOut(props) {
 }
 
 class Grid extends React.Component {
+  static nodes = Array(27).fill(null);
+
   constructor(props) {
     super(props);
     this.state = {
-      nodes: Array(27).fill(null),
       miss: false
     };
     
-    for (let i = 0; i < this.state.nodes.length; i++) {
-      this.state.nodes[i] = new Node(null, null, null, 0, i, false)
+    for (let i = 0; i < Grid.nodes.length; i++) {
+      Grid.nodes[i] = new Node(null, null, null, 0, i, false)
 
       if (i % 9 >= 6) {
-        this.state.nodes[i - 6].nodeDown = this.state.nodes[i -3];
-        this.state.nodes[i - 3].nodeUp = this.state.nodes[i - 6]
-        this.state.nodes[i - 3].nodeDown = this.state.nodes[i];
-        this.state.nodes[i].nodeUp = this.state.nodes[i -3];
+        Grid.nodes[i - 6].nodeDown = Grid.nodes[i -3];
+        Grid.nodes[i - 3].nodeUp = Grid.nodes[i - 6]
+        Grid.nodes[i - 3].nodeDown = Grid.nodes[i];
+        Grid.nodes[i].nodeUp = Grid.nodes[i -3];
       }
     }
   }
 
 
 
+  
+  
   score(i) {
-    const nodes = this.state.nodes.slice();
+    const nodes = Grid.nodes.slice();
     if(nodes[i].num < 0){nodes[i].num = 0}
     if(nodes[i].array == null){nodes[i].array = []}
     let Cone = <img id="img" src="img/c.svg" width="25"/>
@@ -251,7 +254,7 @@ else {
 
 
   // process() {
-  //   const nodes = this.state.nodes.slice();
+  //   const nodes = Grid.nodes.slice();
   //   for (let i = 0; i < nodes.length; i++){
   //     fs.writeFile('local-cache/test.json', JSON.stringify(nodes[i].data), (err) => {
   //       if (err) { return console.error('error') }
@@ -259,10 +262,12 @@ else {
   //   }
   // }
 
+
+
   renderNode(i) {
     return(
       <NodeOut
-        Node = {this.state.nodes[i]}
+        Node = {Grid.nodes[i]}
         onClick = {() => { this.score(i)
                           //  this.process() 
                          }
@@ -270,25 +275,31 @@ else {
       />
     );
   }
-
-
-  render() {
-    const toggleMiss= () =>{
-      this.state.miss = !this.state.miss;
-      console.log(this.state.miss);
-      const nodes = this.state.nodes.slice();
-      for(var i = 0; i < 27; i++){
-        nodes[i].num -=1;
-      }
-    }
-    const logScore = () => {
-      let nodes = this.state.nodes.slice();
+  static getScore(){
+     let nodes = Grid.nodes.slice();
       let sum = 0;
       for(let i = 0; i < 27; i++){
         sum+=nodes[i].pointsNode;
       }
-      console.log(sum);
+      return sum;
+  }
+  render() {
+    const toggleMiss= () =>{
+      this.state.miss = !this.state.miss;
+      console.log(this.state.miss);
+      const nodes = Grid.nodes.slice();
+      for(var i = 0; i < 27; i++){
+        nodes[i].num -=1;
+      }
     }
+    // const logScore = () => {
+    //   let nodes = Grid.nodes.slice();
+    //   let sum = 0;
+    //   for(let i = 0; i < 27; i++){
+    //     sum+=nodes[i].pointsNode;
+    //   }
+    //   console.log(sum);
+    // }
     return (
       <div className="grid-container">
       <button className='toggleMiss' onClick={(e) => toggleMiss()}>Toggle Miss</button>
@@ -348,7 +359,7 @@ else {
             {this.renderNode(26)}
           </div>
         </div>
-        <button className='logScore' onClick={(e) => logScore()}>logScore</button>
+        {/* <button className='logScore' onClick={(e) => logScore()}>logScore</button> */}
       </div>
     );
   }

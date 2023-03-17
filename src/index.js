@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import {Grid} from './components/Grid.js';
-import Community from './components/Community.js';
+import {Community} from './components/Community.js';
 import { Auto } from './components/Auto.js';
 import {Form} from './components/Form.js'
+import { ScoreDisplay } from './components/ScoreDisplay.js';
 import './index.css';
 
 class Field extends React.Component {
@@ -18,6 +19,9 @@ class Field extends React.Component {
   render() {
     return (
       <div className='game-container'>
+        <div className='scoreContainer'>
+          <ScoreDisplay/>
+        </div>
         <div className = 'form-container'>
           <Form/>
         </div>
