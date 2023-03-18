@@ -122,6 +122,38 @@ class Community extends React.Component {
       />
     );
   }
+  renderSubmission(){
+    function Submit() {
+      console.log("aqui")
+      let d1 = "a"
+      let d2 = "b"
+      let d3 = "c"
+      let string = d1 + "," + d2 + "," + d3
+          fetch(
+        "https://script.google.com/macros/s/AKfycbwCs3bHCs5EFYwqvsY-6mqSQA8IGNp1tbk6kvI5uwXZ2CuMT_6XApdvnGBCAiUImFNd/exec",
+        {
+          method: "POST",
+          body: string
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    return (
+      <div className="App">
+        <div>
+        <button onClick={(e) => {Submit()}}>Save</button>
+        </div>
+      </div>
+    );
+  }
+
+
   renderComments(){
     let dmsg;
     let gmsg;
@@ -205,6 +237,9 @@ class Community extends React.Component {
         }
         {
         this.renderComments()
+        }
+        {
+          this.renderSubmission()
         }
 
       </div>
