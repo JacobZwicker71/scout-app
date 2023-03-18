@@ -10,14 +10,15 @@ class autoState {
 
   static toggle() {
     this.state = !this.state;
+    console.log(this.state)
     //console.log(autoState.state)
   }
 }
 
 function Button(props) {
   return (
-    <button className="auto" onClick={props.onClick}>
-      {"Auto"}
+    <button className={autoState.state ? "autoOn" : "autoOff"} onClick={props.onClick}>
+      {"Auto " + (autoState.state ? "On" : "Off")}
       {props.out}
     </button>
   )
@@ -29,7 +30,7 @@ class Auto extends React.Component {
     return(
       <Button
         out = {autoState.state}
-        onClick = {() => autoState.toggle()}
+        onClick = {() => {autoState.toggle(),this.forceUpdate()}}
       />
     );
   }

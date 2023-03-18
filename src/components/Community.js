@@ -5,7 +5,9 @@ import '../index.css';
 import { autoState } from './Auto.js';
 
 class Community extends React.Component {
-  #message = "";
+  #defenseMessage = "";
+  #generalMessage = "";
+  #drivingMessage = "";
   constructor(props) {
     super(props);
     this.state = {
@@ -13,11 +15,14 @@ class Community extends React.Component {
       chargeStation: new ChargeStation(),
     }
   }
-  get message(){return this.#message;}
-  set message(m){this.#message = m;}
+  get defenseMessage(){return this.#defenseMessage;}
+  set defenseMessage(m){this.#defenseMessage = m;}
+  get generalMessage(){return this.#generalMessage;}
+  set generalMessage(m){this.#generalMessage = m;}
+  get drivingMessage(){return this.#drivingMessage;}
+  set drivingMessage(m){this.#drivingMessage = m;}
 
   score(auto) {
-    console.log(auto);
     let chargeStation = this.state.chargeStation;
     if(auto){
       chargeStation = this.state.chargeStationAuto;
@@ -112,33 +117,77 @@ class Community extends React.Component {
     return(
       <ChargeOut
         ChargeStation={chargeStation}
+        auto={auto}
         onClick={() => this.score(auto)}
       />
     );
   }
   renderComments(){
-    let msg;
+    let dmsg;
+    let gmsg;
+    let drmsg;
     const submit = (e) =>{
       e.preventDefault();
     }
     const setMessage = (m) =>{
-      msg = m;
-      this.message = msg;
+      dmsg = m;
+      this.defenseMessage = dmsg;
+    }
+    const setGMessage = (m) =>{
+      gmsg = m;
+      this.generalMessage = gmsg;
+    }
+    const setDMessage = (m) =>{
+      drmsg = m;
+      this.drivingMessage = drmsg;
     }
     //Save doesn't actually do anything but log saved message to console!
     return(
+      <div className='commentSection'>
       <form onSubmit={submit}>
       <legend><b>Defense Comments</b></legend> 
       <textarea type="text" 
       required 
-      value={msg}
+      value={dmsg}
       onChange={(e) => setMessage(e.target.value)}
       rows="15"
       cols="25"
       />
       <br></br>
-      <button onClick={(e) => {console.log(this.message)}}>Save</button>
+      <button onClick={(e) => {console.log(this.defenseMessage)}}>Save</button>
       </form>
+      <br></br>
+
+      <form onSubmit={submit}>
+      <legend><b>General/Offense Comments</b></legend> 
+      <textarea type="text" 
+      required 
+      value={gmsg}
+      onChange={(e) => setGMessage(e.target.value)}
+      rows="15"
+      cols="25"
+      />
+      <br></br>
+      <button onClick={(e) => {console.log(this.generalMessage)}}>Save</button>
+      </form>
+      <br></br>
+
+      <form onSubmit={submit}>
+      <legend><b>Driving Comments</b></legend> 
+      <textarea type="text" 
+      required 
+      value={gmsg}
+      onChange={(e) => setDMessage(e.target.value)}
+      rows="15"
+      cols="25"
+      />
+      <br></br>
+      <button onClick={(e) => {console.log(this.drivingMessage)}}>Save</button>
+      </form>
+      <br></br>
+
+  
+      </div>
     )
   }
     
@@ -189,7 +238,10 @@ class ChargeStation {
 
 function ChargeOut(props) {
   return (
-    <div>
+    <div className="chargeStation-box">
+      <legend>
+        {props.auto ? "Auto" : "Tele-Op"}
+      </legend>
     <button className="chargeStation" onClick={props.onClick}>
       {props.ChargeStation.sym}
      </button>
