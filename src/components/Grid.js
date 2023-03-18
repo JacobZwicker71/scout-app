@@ -71,6 +71,34 @@ class Node {
   set array(arr){this.#array = arr;}
   set missAmount(mA){this.#missAmount = mA;}
   set color(color) { this.#color = color; }
+  static coneHighMake = 0;
+  static coneHighMake = 0;
+  static coneMidMake = 0;
+  static coneMidMiss = 0;
+  static coneLowMake = 0;
+  static coneLowMiss = 0;
+  static cubeHighMake = 0;
+  static cubeHighMake = 0;
+  static cubeMidMake = 0;
+  static cubeMidMiss = 0;
+  static cubeLowMake = 0;
+  static cubeLowMiss = 0;
+  static autoconeHighMake = 0;
+  static autoconeHighMake = 0;
+  static autoconeMidMake = 0;
+  static autoconeMidMiss = 0;
+  static autoconeLowMake = 0;
+  static autoconeLowMiss = 0;
+  static autocubeHighMake = 0;
+  static autocubeHighMake = 0;
+  static autocubeMidMake = 0;
+  static autocubeMidMiss = 0;
+  static autocubeLowMake = 0;
+  static autocubeLowMiss = 0;
+  static coneLowAccidental = 0;
+  static cubeLowAccidental = 0;
+  static autoconeLowAccidental = 0;
+  static autocubeLowAccidental = 0;
   allMiss(node){
     let allMiss = true;
     if(node != undefined){
@@ -365,4 +393,4 @@ else {
   }
 }
 
-export {Grid};
+export {Grid, Node};

@@ -5,6 +5,7 @@ class formState {
     static userName = "None";
     static team = "None";
     static startingPos = "Left";
+    static matchNum = "-1";
 
     get userName(){return userName;}
     get team(){return team;}
@@ -37,6 +38,9 @@ class Form extends React.Component {
             </div>
             </div>
             <div className="formBody">
+            <label>Match #</label>
+            <input type="text" autoComplete='on' placeholder='-1' onChange={(e) => formState.matchNum = e.target.value}></input>  
+              <br></br>
               <label>Scouter Name</label>       
               <input type="text" autoComplete='on' placeholder='John Doe' onChange={(e) => formState.userName = e.target.value}></input>  
               <br></br>

@@ -3,7 +3,8 @@ import '../index.css';
 
 
 import { autoState } from './Auto.js';
-
+import { formState } from './Form.js';
+import {Node} from './Grid.js';
 class Community extends React.Component {
   #defenseMessage = "";
   #generalMessage = "";
@@ -35,10 +36,21 @@ class Community extends React.Component {
     let csEngageFail = <img id="img" src="img/failedEngage.svg" width="200"/>
     let csEngageSucess = <img id="img" src="img/sucessEngage.svg" width="200"/>
     let defaultCharge = <img id="img" src="img/defaultCharge.svg" width="200"/>
-
+    let automobility = "AUTOMOBILITY";
+    let endgamepark = "PARK";
     
-
-    if (chargeStation.out == null) {
+    if(chargeStation.out == null){
+      chargeStation.out = "^";
+      if(auto){
+        chargeStation.sym = automobility;
+        chargeStation.pointsChargeAuto = 1;
+      }
+      else{
+        chargeStation.sym = endgamepark;
+        chargeStation.pointsCharge =2;
+      }
+    }
+    else if (chargeStation.out == "^") {
       chargeStation.out = "-";
       chargeStation.sym = csDockFail;     
       if(auto){
@@ -125,12 +137,58 @@ class Community extends React.Component {
   renderSubmission(){
     function Submit() {
       console.log("aqui")
-      let d1 = "a"
-      let d2 = "b"
-      let d3 = "c"
-      let string = d1 + "," + d2 + "," + d3
+      let teamNum = formState.team;
+      let scouterName = formState.userName;
+      let startingPos = formState.startingPos
+      let matchNum = formState.matchNum;
+      let autoMob = "None";
+      let endgamePos = "None";
+      // let chargeStation =  this.state.chargeStationAuto;
+      // if(chargeStation.out == null){
+      //   autoMob = "None";
+      // }
+      // else if(chargeStation.out == "^"){autoMob = "mob"}
+      // else if(chargeStation.out == "+"){autoMob = "dock"}
+      // else if(chargeStation.out == "asfaf"){autoMob = "engage"}
+      let CHMake = Node.coneHighMake;
+      let CHMiss = Node.coneHighMake;
+      let CMMake = Node.coneMidMake;
+      let CMMiss = Node.coneMidMiss;
+      let CLMake = Node.coneLowMake;
+      let CLMiss = Node.coneLowMiss;
+      let QHMake = Node.cubeHighMake
+      let QHMiss = Node.cubeHighMake
+      let QMMake = Node.cubeMidMake 
+      let QMMiss  = Node.cubeMidMiss
+      let QLMake = Node.cubeLowMake; 
+      let QLMiss = Node.cubeLowMiss;
+
+      let autoCHMake = Node.autoconeHighMake;
+      let autoCHMiss = Node.autoconeHighMake;
+      let autoCMMake = Node.autoconeMidMake;
+      let autoCMMiss = Node.autoconeMidMiss;
+      let autoCLMake = Node.autoconeLowMake;
+      let autoCLMiss = Node.autoconeLowMiss;
+      let autoQHMake = Node.autocubeHighMake
+      let autoQHMiss = Node.autocubeHighMake
+      let autoQMMake = Node.autocubeMidMake 
+      let autoQMMiss  = Node.autocubeMidMiss 
+      let autoQLMake=   Node.autocubeLowMake 
+      let autoQLMiss=   Node.autocubeLowMiss 
+
+      let CLAccidental = Node.coneLowAccidental;
+      let QLAccidental = Node.cubeLowAccidental;
+      let autoCLAccidental = Node.autoconeLowAccidental;
+      let autoQLAccidental = Node.autocubeLowAccidental;
+      let string = teamNum + "," + matchNum + "," + scouterName + 
+      "," + startingPos+","+autoMob +"," +autoCHMake + "," + autoCHMiss + 
+      "," + autoCMMake + "," + autoCMMiss + "," + autoCLMake + "," + autoCLMiss + "," + autoCLAccidental +
+      "," + autoQHMake + "," + autoQHMiss + "," + autoQMMake + "," + autoQMMiss +
+      "," + autoQLMake + "," + autoQLMiss + "," + autoQLAccidental + "," + CHMake + "," + CHMiss +
+      "," + CMMake + "," + CMMiss + "," + CLMake + "," + CLMiss + "," + CLAccidental
+      + "," +  QHMake + ","+ QHMiss+ "," + QMMake + "," + QMMiss + "," + QLMake + "," + QLMiss + "," + QLAccidental + "," + endgamePos;
           fetch(
-        "https://script.google.com/macros/s/AKfycbwCs3bHCs5EFYwqvsY-6mqSQA8IGNp1tbk6kvI5uwXZ2CuMT_6XApdvnGBCAiUImFNd/exec",
+        "https://script.google.com/macros/s/AKfycbxOMdBcJ2pQ02xaIo9AFP8vO0JiBxGUvYJjRhwlx2kquNe7HdGVR-ZNPO397qvQpIl-/exec",
         {
           method: "POST",
           body: string

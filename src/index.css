@@ -87,6 +87,8 @@ ol, ul {
   height:200px;
   outline-color: black;
   border:5px solid black;
+  font-size: 25px;
+  color: white;
 }
 
 .chargeStation:focus {
