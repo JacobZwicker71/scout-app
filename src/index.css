@@ -115,6 +115,16 @@ ol, ul {
   border: solid darkgreen 6px;
 
 }
+.App button{
+  border: 5px solid black;
+  font: 14px "Century Gothic", sans-serif;
+  font-weight: bold;
+  font-size: 32px;
+  height:100px;
+  width: 200px;
+  margin-top:5px;
+  border-radius: 800px;
+}
 .autoOff{
   background: #b69898;
   float: left;

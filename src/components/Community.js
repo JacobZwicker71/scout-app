@@ -135,42 +135,49 @@ class Community extends React.Component {
     );
   }
   renderSubmission(){
-    function Submit() {
-      console.log("aqui")
+    function Submit(aMob, ePos) {
       let teamNum = formState.team;
       let scouterName = formState.userName;
       let startingPos = formState.startingPos
       let matchNum = formState.matchNum;
-      let autoMob = "None";
-      let endgamePos = "None";
-      // let chargeStation =  this.state.chargeStationAuto;
-      // if(chargeStation.out == null){
-      //   autoMob = "None";
-      // }
-      // else if(chargeStation.out == "^"){autoMob = "mob"}
-      // else if(chargeStation.out == "+"){autoMob = "dock"}
-      // else if(chargeStation.out == "asfaf"){autoMob = "engage"}
+      let autoMob;
+      let endgamePos;
+      if(aMob.out == null){
+        autoMob = "None";
+      }
+      else if(aMob.out == "^"){autoMob = "mob"}
+      else if(aMob.out == "+"){autoMob = "dock"}
+      else if(aMob.out == "asfaf"){autoMob = "engage"}
+
+      if(ePos.out == null){
+        endgamePos = "None";
+      }
+      else if(ePos.out == "^"){endgamePos = "park"}
+      else if(ePos.out == "+"){endgamePos = "dock"}
+      else if(ePos.out == "asfaf"){endgamePos = "engage"}
+
+
       let CHMake = Node.coneHighMake;
-      let CHMiss = Node.coneHighMake;
+      let CHMiss = Node.coneHighMiss;
       let CMMake = Node.coneMidMake;
       let CMMiss = Node.coneMidMiss;
       let CLMake = Node.coneLowMake;
       let CLMiss = Node.coneLowMiss;
       let QHMake = Node.cubeHighMake
-      let QHMiss = Node.cubeHighMake
+      let QHMiss = Node.cubeHighMiss
       let QMMake = Node.cubeMidMake 
       let QMMiss  = Node.cubeMidMiss
       let QLMake = Node.cubeLowMake; 
       let QLMiss = Node.cubeLowMiss;
 
       let autoCHMake = Node.autoconeHighMake;
-      let autoCHMiss = Node.autoconeHighMake;
+      let autoCHMiss = Node.autoconeHighMiss;
       let autoCMMake = Node.autoconeMidMake;
       let autoCMMiss = Node.autoconeMidMiss;
       let autoCLMake = Node.autoconeLowMake;
       let autoCLMiss = Node.autoconeLowMiss;
       let autoQHMake = Node.autocubeHighMake
-      let autoQHMiss = Node.autocubeHighMake
+      let autoQHMiss = Node.autocubeHighMiss
       let autoQMMake = Node.autocubeMidMake 
       let autoQMMiss  = Node.autocubeMidMiss 
       let autoQLMake=   Node.autocubeLowMake 
@@ -205,7 +212,7 @@ class Community extends React.Component {
     return (
       <div className="App">
         <div>
-        <button onClick={(e) => {Submit()}}>Save</button>
+        <button onClick={(e) => {Submit(this.state.chargeStationAuto,this.state.chargeStation)}}>Submit</button>
         </div>
       </div>
     );
@@ -281,7 +288,6 @@ class Community extends React.Component {
     )
   }
     
-
 
 
   render() {

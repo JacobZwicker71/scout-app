@@ -72,25 +72,25 @@ class Node {
   set missAmount(mA){this.#missAmount = mA;}
   set color(color) { this.#color = color; }
   static coneHighMake = 0;
-  static coneHighMake = 0;
+  static coneHighMiss = 0;
   static coneMidMake = 0;
   static coneMidMiss = 0;
   static coneLowMake = 0;
   static coneLowMiss = 0;
   static cubeHighMake = 0;
-  static cubeHighMake = 0;
+  static cubeHighMiss = 0;
   static cubeMidMake = 0;
   static cubeMidMiss = 0;
   static cubeLowMake = 0;
   static cubeLowMiss = 0;
   static autoconeHighMake = 0;
-  static autoconeHighMake = 0;
+  static autoconeHighMiss = 0;
   static autoconeMidMake = 0;
   static autoconeMidMiss = 0;
   static autoconeLowMake = 0;
   static autoconeLowMiss = 0;
   static autocubeHighMake = 0;
-  static autocubeHighMake = 0;
+  static autocubeHighMiss = 0;
   static autocubeMidMake = 0;
   static autocubeMidMiss = 0;
   static autocubeLowMake = 0;
@@ -277,9 +277,163 @@ else {
 
     //console.log(nodes[i].link() ? "true" : false);
     nodes[i].update();
-
+    this.setStatics(nodes[i].auto);
+    
   }
-
+  setStatics(auto){
+    this.resetStatics();
+    let nodes = Grid.nodes;
+    for(let i = 0; i < 27; i++){
+      if(i % 3 == 0){
+        let array = nodes[i].array;
+        if(array != null){
+        array.forEach(element => {
+          if(element.props.src == "img/c.svg"){
+            if(auto){
+              Node.autoconeHighMake++;
+            }
+            else{
+              Node.coneHighMake++;
+            }
+          }
+          if(element.props.src == "img/cm.svg"){
+            if(auto){
+              Node.autoconeHighMiss++;
+            }
+            else{
+              Node.coneHighMiss++;
+            }
+          }
+          if(element.props.src == "img/q.svg"){
+            if(auto){
+              Node.autocubeHighMake++;
+            }
+            else{
+              Node.autocubeHighMake++;
+            }
+          }
+          if(element.props.src == "img/qm.svg"){
+            if(auto){
+              Node.autocubeHighMiss++;
+            }
+            else{
+              Node.cubeHighMiss++;
+            }
+          }
+        }
+        );
+      }
+    }
+    if(i % 3 == 1){
+      let array = nodes[i].array;
+        if(array != null){
+        array.forEach(element => {
+          if(element.props.src == "img/c.svg"){
+            if(auto){
+              Node.autoconeMidMake++;
+            }
+            else{
+              Node.coneMidMake++;
+            }
+          }
+          if(element.props.src == "img/cm.svg"){
+            if(auto){
+              Node.autoconeMidMiss++;
+            }
+            else{
+              Node.coneMidMiss++;
+            }
+          }
+          if(element.props.src == "img/q.svg"){
+            if(auto){
+              Node.autocubeMidMake++;
+            }
+            else{
+              Node.autocubeMidMake++;
+            }
+          }
+          if(element.props.src == "img/qm.svg"){
+            if(auto){
+              Node.autocubeMidMiss++;
+            }
+            else{
+              Node.cubeMidMiss++;
+            }
+          }
+        }
+      )}
+    }
+    if(i % 3 ==2){
+      let array = nodes[i].array;
+      if(array != null){
+      array.forEach(element => {
+        if(element.props.src == "img/c.svg"){
+          if(auto){
+            Node.autoconeLowMake++;
+          }
+          else{
+            Node.coneLowMake++;
+          }
+        }
+        if(element.props.src == "img/cm.svg"){
+          if(auto){
+            Node.autoconeLowMiss++;
+          }
+          else{
+            Node.coneLowMiss++;
+          }
+        }
+        if(element.props.src == "img/q.svg"){
+          if(auto){
+            Node.autocubeLowMake++;
+          }
+          else{
+            Node.autocubeLowMake++;
+          }
+        }
+        if(element.props.src == "img/qm.svg"){
+          if(auto){
+            Node.autocubeLowMiss++;
+          }
+          else{
+            Node.cubeLowMiss++;
+          }
+        }
+      }
+    )}
+    }
+    }
+  }
+  resetStatics(){
+    Node.coneHighMake = 0;
+    Node.coneHighMiss = 0;
+    Node.coneMidMake = 0;
+    Node.coneMidMiss = 0;
+    Node.coneLowMake = 0;
+    Node.coneLowMiss = 0;
+    Node.cubeHighMake = 0;
+    Node.cubeHighMiss = 0;
+    Node.cubeMidMake = 0;
+    Node.cubeMidMiss = 0;
+    Node.cubeLowMake = 0;
+    Node.cubeLowMiss = 0;
+    Node.autoconeHighMake = 0;
+    Node.autoconeHighMiss = 0;
+    Node.autoconeMidMake = 0;
+    Node.autoconeMidMiss = 0;
+    Node.autoconeLowMake = 0;
+    Node.autoconeLowMiss = 0;
+    Node.autocubeHighMake = 0;
+    Node.autocubeHighMiss = 0;
+    Node.autocubeMidMake = 0;
+    Node.autocubeMidMiss = 0;
+    Node.autocubeLowMake = 0;
+    Node.autocubeLowMiss = 0;
+    Node.coneLowAccidental = 0;
+    Node.cubeLowAccidental = 0;
+    Node.autoconeLowAccidental = 0;
+    Node.autocubeLowAccidental = 0;
+  }
 
   // process() {
   //   const nodes = Grid.nodes.slice();
