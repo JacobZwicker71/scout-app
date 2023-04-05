@@ -6,6 +6,7 @@ import { autoState } from './Auto.js';
 import { formState } from './Form.js';
 import {Node} from './Grid.js';
 class Community extends React.Component {
+
   #defenseMessage = "";
   #generalMessage = "";
   #drivingMessage = "";
@@ -135,7 +136,10 @@ class Community extends React.Component {
     );
   }
   renderSubmission(){
-    function Submit(aMob, ePos) {
+    function Submit(aMob, ePos, dComm, oComm, drComm) {
+      let drivingComments = drComm;
+      let defenseFoulComments = dComm;
+      let offenseComments = oComm;
       let teamNum = formState.team;
       let scouterName = formState.userName;
       let startingPos = formState.startingPos
@@ -187,15 +191,18 @@ class Community extends React.Component {
       let QLAccidental = Node.cubeLowAccidental;
       let autoCLAccidental = Node.autoconeLowAccidental;
       let autoQLAccidental = Node.autocubeLowAccidental;
+     
       let string = teamNum + "," + matchNum + "," + scouterName + 
       "," + startingPos+","+autoMob +"," +autoCHMake + "," + autoCHMiss + 
       "," + autoCMMake + "," + autoCMMiss + "," + autoCLMake + "," + autoCLMiss + "," + autoCLAccidental +
       "," + autoQHMake + "," + autoQHMiss + "," + autoQMMake + "," + autoQMMiss +
       "," + autoQLMake + "," + autoQLMiss + "," + autoQLAccidental + "," + CHMake + "," + CHMiss +
       "," + CMMake + "," + CMMiss + "," + CLMake + "," + CLMiss + "," + CLAccidental
-      + "," +  QHMake + ","+ QHMiss+ "," + QMMake + "," + QMMiss + "," + QLMake + "," + QLMiss + "," + QLAccidental + "," + endgamePos;
+      + "," +  QHMake + ","+ QHMiss+ "," + QMMake + "," + QMMiss + "," + QLMake + "," 
+      + QLMiss + "," + QLAccidental + "," + endgamePos + "," +offenseComments + "," + 
+      defenseFoulComments + "," + drivingComments;
           fetch(
-        "https://script.google.com/macros/s/AKfycbxOMdBcJ2pQ02xaIo9AFP8vO0JiBxGUvYJjRhwlx2kquNe7HdGVR-ZNPO397qvQpIl-/exec",
+        "https://script.google.com/macros/s/AKfycbxy9C9ZhEi4YNQS3LTn5bAZaKCmCgOxkVxUYZW29jRbAI_at6wq5y2BlP43qoqkPCsF/exec",
         {
           method: "POST",
           body: string
@@ -212,7 +219,7 @@ class Community extends React.Component {
     return (
       <div className="App">
         <div>
-        <button onClick={(e) => {Submit(this.state.chargeStationAuto,this.state.chargeStation)}}>Submit</button>
+        <button onClick={(e) => {Submit(this.state.chargeStationAuto,this.state.chargeStation,this.defenseMessage,this.generalMessage,this.drivingMessage)}}>Submit</button>
         </div>
       </div>
     );
